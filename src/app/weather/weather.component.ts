@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Weather } from '../weather';
+import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./weather.component.scss']
 })
 export class WeatherComponent {
+  weather: Weather | undefined;
 
+  constructor(public weatherService: WeatherService){
+    
+  }
+
+  search(city: string){
+    this.weatherService.getWeather(city).subscribe(weather => {
+      this.weather = weather;
+    });
+  }
 }
